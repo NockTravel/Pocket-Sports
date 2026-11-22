@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0a2740" />
+<title>Pocket Sports</title>
+<style>
+  :root{
+    --navy:#0a2740; --navy2:#07202f; --panel:#0c2a44; --line:rgba(120,160,200,.22);
+    --ink:#eaf2fb; --dim:#9fb6cc; --lime:#e8f24a; --green:#9cff57; --amber:#ffcf5a; --grey:#7f97ac;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    color:var(--ink); background:var(--navy);
+    min-height:100vh; -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(120% 80% at 50% -10%, #12395c 0%, var(--navy) 55%, var(--navy2) 100%);
+  }
+  /* faint low-poly facets in the backdrop */
+  .facets{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:.5}
+  .facets span{position:absolute;display:block;opacity:.06;
+    border-left:solid transparent;border-right:solid transparent;border-bottom:solid var(--lime)}
+  .wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:
+    calc(env(safe-area-inset-top,0px) + 34px) 18px calc(env(safe-area-inset-bottom,0px) + 40px)}
+  header{text-align:center;margin-bottom:26px}
+  .brand{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+  h1{font-size:clamp(34px,10vw,52px);line-height:1;margin:0 0 8px;font-weight:900;letter-spacing:.5px}
+  h1 .k{color:var(--lime)}
+  .tag{color:var(--dim);font-size:15px;margin:0}
+  .grid{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:580px){.grid{grid-template-columns:1fr 1fr}}
+  .card{
+    display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;
+    background:linear-gradient(180deg, rgba(14,44,72,.9), rgba(8,28,46,.9));
+    border:1px solid var(--line); border-radius:16px; padding:16px;
+    transition:transform .14s ease, border-color .14s ease, box-shadow .14s ease;
+    position:relative; overflow:hidden;
+  }
+  .card.live:hover,.card.live:focus-visible{
+    transform:translateY(-3px); border-color:var(--lime);
+    box-shadow:0 10px 30px rgba(0,0,0,.4), 0 0 0 1px rgba(232,242,74,.25) inset; outline:none;
+  }
+  .card.soon{opacity:.62; cursor:default}
+  .icon{flex:0 0 auto;width:60px;height:60px;border-radius:14px;display:grid;place-items:center;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+  .body{flex:1;min-width:0}
+  .name{font-size:19px;font-weight:800;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .badge{font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+    padding:3px 8px;border-radius:999px;white-space:nowrap}
+  .b-live{background:rgba(156,255,87,.16);color:var(--green)}
+  .b-wip{background:rgba(255,207,90,.16);color:var(--amber)}
+  .b-soon{background:rgba(127,151,172,.16);color:var(--grey)}
+  .desc{color:var(--dim);font-size:13.5px;line-height:1.45;margin-top:4px}
+  .go{margin-left:auto;align-self:center;font-weight:800;color:var(--lime);font-size:14px;white-space:nowrap}
+  .card.soon .go{color:var(--grey)}
+  footer{margin-top:30px;text-align:center;color:var(--dim);font-size:12.5px;line-height:1.7}
+  footer .next{color:var(--ink);opacity:.85}
+  footer .next b{color:var(--lime);font-weight:700}
+</style>
+</head>
+<body>
+<div class="facets" id="facets"></div>
+<div class="wrap">
+  <header>
+    <div class="brand">NockTravel</div>
+    <h1>Pocket <span class="k">Sports</span></h1>
+    <p class="tag">Low-poly. One thumb. Pick a game.</p>
+  </header>
+  <div class="grid" id="grid"></div>
+  <footer>
+    <div class="next">On the workbench: <b>Darts</b> · <b>Pool</b> · <b>Disc Golf</b></div>
+    <div style="margin-top:8px">© 2026 NockTravel · best on a phone, in portrait</div>
+  </footer>
+</div>
+
+<script>
+  // ---- Edit this list as builds come online. ----
+  // Golf + Archery are their own repos (absolute URLs). New games live INSIDE
+  // this Pocket Sports repo as subfolders, so they use relative links — just
+  // drop each build in its folder (e.g. /tennis/, /bowling/) and set the path.
+  const GAMES = [
+    {
+      key: "golf", name: "Pocket Golf",
+      status: "Play ready", badge: "b-live", live: true,
+      desc: "The full build — courses, the long-grind career, online scores. Ready to play.",
+      url: "https://nocktravel.github.io/Pocket-Golf/index.html",
+    },
+    {
+      key: "tennis", name: "Pocket Tennis",
+      status: "In progress", badge: "b-wip", live: true,
+      desc: "Playable v0.1 — serve, rally, full tennis scoring across five courts.",
+      url: "./tennis/index.html",
+    },
+    {
+      key: "archery", name: "Pocket Archery",
+      status: "In progress", badge: "b-wip", live: true,
+      desc: "Same stack, taking shape — aim, draw and release under the wind.",
+      url: "https://nocktravel.github.io/Pocket-Archery/index.html",
+    },
+    {
+      key: "bowling", name: "Pocket Bowling",
+      status: "Not built yet", badge: "b-soon", live: false,
+      desc: "On the list — line up, pick your spin, knock 'em down.",
+      url: "./bowling/index.html",
+    },
+  ];
+
+  const ICONS = {
+    golf: `<svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <ellipse cx="17" cy="27" rx="13" ry="4" fill="#3f8f4a"/>
+      <path d="M13 6h12l-5 3 5 3H13z" fill="#e7452f"/>
+      <rect x="12" y="6" width="2" height="19" rx="1" fill="#d7e0e8"/>
+      <circle cx="22" cy="27" r="2.4" fill="#f4f7f0"/></svg>`,
+    tennis: `<svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <circle cx="17" cy="17" r="12" fill="#d6ec3a"/>
+      <path d="M6 12c7 1 12 6 13 15M28 12c-7 1-12 6-13 15" stroke="#f4f7f0" stroke-width="1.6" fill="none"/></svg>`,
+    archery: `<svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <circle cx="17" cy="17" r="12" fill="#f2f2f2"/><circle cx="17" cy="17" r="9.2" fill="#2f2f2f"/>
+      <circle cx="17" cy="17" r="6.4" fill="#3aa0e7"/><circle cx="17" cy="17" r="3.6" fill="#e7452f"/>
+      <circle cx="17" cy="17" r="1.4" fill="#e8c23a"/>
+      <path d="M4 30L30 4" stroke="#caa06a" stroke-width="1.6"/><path d="M30 4l-4 1 3 3z" fill="#d7e0e8"/></svg>`,
+    bowling: `<svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <path d="M13 5c2 4 2 9 0 14 0 3 4 3 4 0-2-5-2-10 0-14-1-2-3-2-4 0z" fill="#f1f4f7"/>
+      <circle cx="13" cy="10" r="1.3" fill="#e7452f"/>
+      <circle cx="24" cy="23" r="8" fill="#1f3550"/>
+      <circle cx="21.5" cy="21" r="1.1" fill="#0a1626"/><circle cx="24.5" cy="20.5" r="1.1" fill="#0a1626"/>
+      <circle cx="23" cy="23.5" r="1.1" fill="#0a1626"/></svg>`,
+  };
+
+  const grid = document.getElementById("grid");
+  for (const g of GAMES) {
+    const linked = g.live && g.url;
+    const el = document.createElement(linked ? "a" : "div");
+    el.className = "card " + (linked ? "live" : "soon");
+    if (linked) { el.href = g.url; el.setAttribute("aria-label", g.name + " — " + g.status); }
+    el.innerHTML = `
+      <div class="icon">${ICONS[g.key] || ""}</div>
+      <div class="body">
+        <div class="name">${g.name} <span class="badge ${g.badge}">${g.status}</span></div>
+        <div class="desc">${g.desc}</div>
+      </div>
+      <div class="go">${linked ? "Play ▸" : "Soon"}</div>`;
+    grid.appendChild(el);
+  }
+
+  // scatter a few faint low-poly triangles
+  const fc = document.getElementById("facets");
+  const N = 7;
+  for (let i = 0; i < N; i++) {
+    const s = document.createElement("span");
+    const w = 60 + Math.random() * 160;
+    s.style.borderLeftWidth = w / 2 + "px";
+    s.style.borderRightWidth = w / 2 + "px";
+    s.style.borderBottomWidth = w * 0.9 + "px";
+    s.style.left = Math.random() * 100 + "%";
+    s.style.top = Math.random() * 100 + "%";
+    s.style.transform = "rotate(" + Math.floor(Math.random() * 360) + "deg)";
+    fc.appendChild(s);
+  }
+</script>
+</body>
+</html>
