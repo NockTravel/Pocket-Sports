@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "surfaces": {
+    "grass": {
+      "label": "Grass",
+      "speedKeep": 0.8,
+      "bounce": 0.54,
+      "spinGrip": 0.3,
+      "color": "#3f8f4a",
+      "lineColor": "#f4f7f0"
+    },
+    "hard": {
+      "label": "Hard",
+      "speedKeep": 0.69,
+      "bounce": 0.7,
+      "spinGrip": 0.52,
+      "color": "#2f6fb0",
+      "lineColor": "#f2f6fb"
+    },
+    "clay": {
+      "label": "Clay",
+      "speedKeep": 0.58,
+      "bounce": 0.8,
+      "spinGrip": 0.82,
+      "color": "#b4603a",
+      "lineColor": "#f3ead9"
+    }
+  },
+  "courts": [
+    {
+      "id": "melbourne",
+      "name": "Melbourne Centre",
+      "location": "Melbourne, Australia",
+      "surface": "hard",
+      "speed": 0.62,
+      "altitude": 31,
+      "roof": true,
+      "night": true,
+      "crowd": 15000,
+      "wind": 0.05,
+      "real": true,
+      "blurb": "Blue cushioned hard court, medium-fast, big summer crowds.",
+      "surfaceProfile": {
+        "label": "Hard",
+        "speedKeep": 0.69,
+        "bounce": 0.7,
+        "spinGrip": 0.52,
+        "color": "#2f6fb0",
+        "lineColor": "#f2f6fb"
+      }
+    },
+    {
+      "id": "paris",
+      "name": "Paris Terre Battue",
+      "location": "Paris, France",
+      "surface": "clay",
+      "speed": 0.4,
+      "altitude": 35,
+      "roof": true,
+      "night": true,
+      "crowd": 15000,
+      "wind": 0.1,
+      "real": true,
+      "blurb": "Deep red clay. Slow, high bounce, rewards spin and patience.",
+      "surfaceProfile": {
+        "label": "Clay",
+        "speedKeep": 0.58,
+        "bounce": 0.8,
+        "spinGrip": 0.82,
+        "color": "#b4603a",
+        "lineColor": "#f3ead9"
+      }
+    },
+    {
+      "id": "london",
+      "name": "London Lawns",
+      "location": "London, England",
+      "surface": "grass",
+      "speed": 0.82,
+      "altitude": 11,
+      "roof": true,
+      "night": false,
+      "crowd": 14900,
+      "wind": 0.08,
+      "real": true,
+      "blurb": "Pristine grass. Fast, low skid — first-strike tennis.",
+      "surfaceProfile": {
+        "label": "Grass",
+        "speedKeep": 0.8,
+        "bounce": 0.54,
+        "spinGrip": 0.3,
+        "color": "#3f8f4a",
+        "lineColor": "#f4f7f0"
+      }
+    },
+    {
+      "id": "newyork",
+      "name": "New York Night",
+      "location": "New York, USA",
+      "surface": "hard",
+      "speed": 0.7,
+      "altitude": 3,
+      "roof": false,
+      "night": true,
+      "crowd": 23000,
+      "wind": 0.14,
+      "real": true,
+      "blurb": "Fast hard court under lights. Loudest crowd in the game.",
+      "surfaceProfile": {
+        "label": "Hard",
+        "speedKeep": 0.69,
+        "bounce": 0.7,
+        "spinGrip": 0.52,
+        "color": "#2f6fb0",
+        "lineColor": "#f2f6fb"
+      }
+    },
+    {
+      "id": "altiplano",
+      "name": "Altiplano Open",
+      "location": "La Paz (fictional)",
+      "surface": "hard",
+      "speed": 0.78,
+      "altitude": 3600,
+      "roof": false,
+      "night": false,
+      "crowd": 6000,
+      "wind": 0.18,
+      "real": false,
+      "blurb": "Thin mountain air — the ball flies. Serves jump, lungs burn.",
+      "surfaceProfile": {
+        "label": "Hard",
+        "speedKeep": 0.69,
+        "bounce": 0.7,
+        "spinGrip": 0.52,
+        "color": "#2f6fb0",
+        "lineColor": "#f2f6fb"
+      }
+    }
+  ]
+}
